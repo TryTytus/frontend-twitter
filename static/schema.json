@@ -1,0 +1,79 @@
+{
+    "id": 1,
+    "content": "My post content",
+    "media": "",
+    "author": "Author name",
+    "author_id": "xyz123",
+    "date": "2012-04-23T18:25:43.511Z",
+    "comments": [
+        {
+            "id": 1,
+            "content": "My post content",
+            "author": "Author name",
+            "author_id": "xyz123",
+            "date": "2012-04-23T18:25:43.511Z",
+            "comments": [
+                {
+                    "id": 1,
+                    "content": "My post content",
+                    "author": "Author name",
+                    "author_id": "xyz123",
+                    "date": "2012-04-23T18:25:43.511Z",
+                    "comments": [
+                        {
+                            "id": 1,
+                            "content": "My post content",
+                            "author": "Author name",
+                            "author_id": "xyz123",
+                            "date": "2012-04-23T18:25:43.511Z",
+                            "comments": [
+                
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "content": "My post content",
+                    "author": "Author name",
+                    "author_id": "xyz123",
+                    "date": "2012-04-23T18:25:43.511Z",
+                    "comments": [
+        
+                    ]
+                }
+
+            ]
+            
+        },
+        {
+            "id": 2,
+            "content": "My post content",
+            "author": "Author name",
+            "author_id": "xyz123",
+            "date": "2012-04-23T18:25:43.511Z",
+            "comments": [
+                {
+                    "id": 1,
+                    "content": "My post content",
+                    "author": "Author name",
+                    "author_id": "xyz123",
+                    "date": "2012-04-23T18:25:43.511Z",
+                    "comments": [
+        
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "content": "My post content",
+            "author": "Author name",
+            "author_id": "xyz123",
+            "date": "2012-04-23T18:25:43.511Z",
+            "comments": [
+                
+            ]
+        }
+    ]
+}
