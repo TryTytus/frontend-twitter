@@ -4,7 +4,7 @@
     import "../app.css";
     import { ModeWatcher } from "mode-watcher";
     import Header from "$lib/custom/blocs/.header.svelte";
-  import Sidebar from "$lib/custom/blocs/sidebar.svelte";
+  import Sidebar from "$lib/custom/blocs/sidebar/sidebar.svelte";
 
   </script>
   

@@ -1,5 +1,5 @@
 <script>
-  import PostCard from "$lib/custom/blocs/post-card.svelte";
+  import PostCard from "$lib/custom/blocs/post/post-card.svelte";
 
 </script>
 

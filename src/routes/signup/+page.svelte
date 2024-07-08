@@ -1,16 +1,19 @@
 <script lang="ts">
-    import { Button } from "$lib/components/ui/button/index.js";
-    import * as Card from "$lib/components/ui/card/index.js";
-    import { Input } from "$lib/components/ui/input/index.js";
-    import { Label } from "$lib/components/ui/label/index.js";
-  </script>
-  
+  import { Button } from "$lib/components/ui/button/index.js";
+  import * as Card from "$lib/components/ui/card/index.js";
+  import { Input } from "$lib/components/ui/input/index.js";
+  import { Label } from "$lib/components/ui/label/index.js";
+</script>
 
-  <main class="fixed top-0 left-0 z-50 w-full bg-black h-full grid place-content-center">
+<main
+  class="fixed top-0 left-0 z-50 w-full bg-black h-full grid place-content-center"
+>
   <Card.Root class="mx-auto max-w-sm">
     <Card.Header>
       <Card.Title class="text-xl">Sign Up</Card.Title>
-      <Card.Description>Enter your information to create an account</Card.Description>
+      <Card.Description
+        >Enter your information to create an account</Card.Description
+      >
     </Card.Header>
     <Card.Content>
       <div class="grid gap-4">
@@ -42,4 +45,3 @@
     </Card.Content>
   </Card.Root>
 </main>
-  

@@ -1,8 +1,6 @@
 <script lang="ts">
     import TreeNode from "./tree-node.svelte"
     export let tree: any[] = []
-    
-    import { ArrowLeft, MessageCircle, Bookmark, Download, Heart, Repeat, CircleMinus } from "lucide-svelte";
 
   </script>
   
