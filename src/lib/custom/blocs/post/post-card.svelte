@@ -6,6 +6,7 @@
 
 
   let color = "#FFFFFF"
+  
 
   </script>
    
@@ -14,7 +15,7 @@
     <Card.Header>
       <div class="flex items-center gap-3">
         <Avatar.Root>
-          <Avatar.Image class="z-0" src="https://github.com/shadcn.png" alt="@shadcn" />
+          <Avatar.Image class="z-0" src="/morty.jpeg" alt="@shadcn" />
           <Avatar.Fallback>CNN</Avatar.Fallback>
         </Avatar.Root>
         <div>
@@ -29,7 +30,7 @@
 
     </Card.Header>
     <Card.Content>
-      <img class="z-0 lg:aspect-[1/1] object-cover rounded" src="https://images.unsplash.com/photo-1719937075949-83b1f1ee3e42?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" srcset="">
+      <img class="z-0 lg:aspect-[1/1] object-cover rounded" src="/cards.avif" alt="" srcset="">
     </Card.Content>
     <Card.Footer class="flex mx-4 justify-between">
         <MessageCircle class="hover:stroke-blue-400" />

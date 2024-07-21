@@ -7,9 +7,6 @@
 
   import SuperTokensReactComponent from './supertokens';
 
-  let rootId = 'rootId'
-
-
   onMount(() => {
     if (browser)
      ReactDOM.render(React.createElement(SuperTokensReactComponent), document.getElementById('rootId'));
@@ -22,6 +19,8 @@
 
 </script>
 
-<main class="fixed top-0 left-0 z-50 w-full h-full bg-black">
+<main class="fixed top-0 left-0 z-50 w-full h-full grid place-content-center bg-black">
   <div id="rootId"></div>
 </main>
+
+

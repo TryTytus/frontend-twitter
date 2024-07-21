@@ -2,6 +2,9 @@
   import Tree from "$lib/custom/blocs/tree/tree.svelte";
   import CommentSection from "$lib/custom/blocs/comment-section.svelte";
   import Post from "$lib/custom/blocs/post/post.svelte";
+  import type { PageData } from "../$types";
+
+  export let data: PageData;
 
   let tree = [
     {
@@ -77,11 +80,9 @@
 </script>
 
 <main class="border-gray-700 -my-5 w-full border-x min-h-[100vh]">
-  <Post />
+  <Post author={data?.post?.user?.name} nickname={data?.post?.user?.nickname} content={data?.post?.content} />
 
   <div class="mb-6">
-
-    
     <Tree {tree} let:node>
       <CommentSection {node} />
     </Tree>

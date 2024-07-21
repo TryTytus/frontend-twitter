@@ -86,5 +86,5 @@
 
 @font-face {
   font-family: TwitterChirp;
-  src: url('https://abs.twimg.com/responsive-web/client-web/Chirp-Regular.80fda27a.woff2');
+  src: url('http://localhost:5173/Chirp-Regular.80fda27a.woff2');
 }

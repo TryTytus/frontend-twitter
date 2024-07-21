@@ -7,7 +7,7 @@
         export let variant: $$Props["variant"] = "ghost";
 </script>
 
-<Button variant={variant} class=" w-full justify-start">
+<Button on:click variant={variant} class=" w-full justify-start">
     <div class="flex gap-3 items-center">
         <slot/>
     </div>
