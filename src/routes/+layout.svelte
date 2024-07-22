@@ -36,7 +36,7 @@ let userId: string | null = null
       userId = await Session.getUserId();
       setContext('userId', null);
       user = await fetch(`http://localhost:3000/user/${userId}`)
-        .then((res) => res.json())
+        .then( async (res) =>{ console.log(await res.json());  return res.json();  })
         .catch((e) => console.error(e));
         
       if (user === undefined) goto("/getStarted");
