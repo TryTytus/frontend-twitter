@@ -12,6 +12,16 @@
   let replyBox = false;
 
   let replayBoxSwitch = () => (replyBox = !replyBox);
+
+  export const handle = (content: string) => {
+      node.comments = [
+        {
+          name: "name",
+          content,
+        },
+        ...node.comments,
+      ];
+  };
 </script>
 
 <div style="font-family: TwitterChirp;">
@@ -28,7 +38,7 @@
         bind:showChildren
         commentsSize={node?.comments?.length}
       />
-      <TreeComment {path} {replyBox} />
+      <TreeComment {handle} {path} {replyBox} />
     </div>
   </div>
   {#if node.comments && showChildren}

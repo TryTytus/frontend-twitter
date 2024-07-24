@@ -49,7 +49,7 @@ let userId: string | null = null
 <div class="flex min-h-screen w-full flex-col">
   <div class="grid grid-flow-col lg:grid-cols-5">
     <Sidebar class="hidden lg:block sticky top-0 max-h-[200px]" />
-    <div class="w-full col-span-3 flex my-5">
+    <div class="w-full col-span-3 flex ">
       <Toaster />
       <slot {userId} />
     </div>

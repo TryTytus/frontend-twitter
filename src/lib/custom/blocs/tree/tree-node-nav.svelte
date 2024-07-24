@@ -20,7 +20,7 @@
   {/if}
   <div class="flex items-center gap-2">
     <Heart class="w-4" />
-    2.3 K likes
+    0 likes
   </div>
 
   <div class="w-2" />

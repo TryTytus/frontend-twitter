@@ -28,7 +28,8 @@
 	"dependencies": {
 		"bits-ui": "^0.21.12",
 		"clsx": "^2.1.1",
-		"lucide-svelte": "^0.410.0",
+		"cmdk-sv": "^0.0.18",
+		"lucide-svelte": "^0.414.0",
 		"mode-watcher": "^0.4.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",

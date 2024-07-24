@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hide Element on Click</title>
+    <style>
+        #myElement {
+            width: 200px;
+            height: 200px;
+            background-color: lightblue;
+            display: block;
+        }
+    </style>
+
+    
+</head>
+<body>
+    <div id="myElement">Click outside of me to hide me!</div>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+    const myElement = document.getElementById('myElement');
+
+    document.addEventListener('click', (e) => {
+        if (!myElement.contains(e.target)) {
+            myElement.style.display = 'none';
+        }
+    });
+
+    myElement.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent the event from bubbling up to the document
+    });
+});
+    </script>
+</body>
