@@ -11,8 +11,9 @@
     Repeat,
   } from "lucide-svelte";
 
+  export let id = "3";
   export let author = "Elon Musk";
-  export let avatar = "/morty.jpeg";
+  let avatar = "/morty.jpeg";
   export let nickname = "elonmusk";
   export let content = `
   Lorem ipsum dolor, sit amet consectetur adipisicing elit. Adipisci
@@ -26,9 +27,29 @@
         iste aperiam sunt, aliquid ipsam quasi? Facere doloremque obcaecati sunt
         architecto nobis fugiat saepe magni, amet harum.
   `;
+  export let isLiked = false;
+  export let likesCount = 0;
+
+
+  async function handleLike() {
+    if (!isLiked) {
+      isLiked = true;
+      likesCount++;
+      await fetch(`http://localhost:3000/post-likes/like/${id}`, {
+        method: 'POST'
+      })
+    } else {
+      isLiked = false;
+      likesCount--;
+      await fetch(`http://localhost:3000/post-likes/dislike/${id}`, {
+        method: 'POST'
+      });
+    }
+  }
+
 </script>
 
-<div class="w-full px-4">
+<a data-sveltekit-preload-data="off" href={`/status/${id}`} class="w-full px-4">
   <Card.Root class=" border-t-0 lg:w-[600px] rounded-none">
     <Card.Header class="pb-1">
       <div class="flex items-center gap-3">
@@ -59,10 +80,12 @@
         <Repeat class=" w-4" />
         0
       </div>
-      <div class="flex items-center gap-2 hover:text-pink-500">
-        <Heart class="w-4" />
-        0
-      </div>
+      <button on:click={handleLike}
+        class={`flex items-center gap-2 ${isLiked ? "text-pink-500" : "hover:text-pink-500"}`}
+      >
+        <Heart class={`w-4 ${isLiked ? "fill-pink-500" : ""}`} />
+        {likesCount}
+    </button>
       <div class="flex items-center gap-2 hover:text-blue-400">
         <BarChart2 class="w-4" />
         0
@@ -73,4 +96,4 @@
       </div>
     </Card.Footer>
   </Card.Root>
-</div>
+</a>

@@ -42,11 +42,11 @@
 
 		
 
-        <SidebarButton variant="secondary">
+        <SidebarButton on:click={() => goto('/')} variant="secondary">
           <Home class="w-4" />
           Home
         </SidebarButton>
-        <SidebarButton>
+        <SidebarButton on:click={() => goto('/explore')}>
           <Search class="w-4" />
           Explore
         </SidebarButton>
@@ -54,7 +54,7 @@
           <Bell class="w-4" />
           Notifications
         </SidebarButton>
-        <SidebarButton>
+        <SidebarButton  on:click={() => goto('/chat')}>
           <Mail class="w-4" />
           Messages
         </SidebarButton>

@@ -4,6 +4,7 @@
   import PostNav from "./post-nav.svelte";
   import PostHeader from "./post-header.svelte";
 
+  export let id = 3;
   export let author = "Elon Musk";
   export let nickname = "elonmusk";
   export let content = `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Adipisci pariatur
@@ -19,8 +20,8 @@
 
   export let viewsCount = 118;
 
-
-
+  export let isLiked = false;
+  export let likesCount = 0;
 </script>
 
 <PostHeader />
@@ -56,4 +57,4 @@
   <p>Views</p>
 </div>
 
-<PostNav />
+<PostNav {id} {isLiked} {likesCount} />

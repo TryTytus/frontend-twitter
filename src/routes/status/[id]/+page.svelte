@@ -1,4 +1,5 @@
 <script lang="ts">
+  // @ts-nocheck
   import Tree from "$lib/custom/blocs/tree/tree.svelte";
   import CommentSection from "$lib/custom/blocs/comment-section.svelte";
   import Post from "$lib/custom/blocs/post/post.svelte";
@@ -39,14 +40,14 @@
   let open = false;
   let myElement: HTMLElement;
 
-  const handleClick = (event) => {
+  const handleClick = (event: any) => {
     if (myElement && !myElement.contains(event.target)) {
       // myElement.style.display = 'none';
       open = false;
     } else open = true;
   };
 
-  const preventPropagation = (event) => {
+  const preventPropagation = (event: any) => {
     event.stopPropagation();
   };
 
@@ -60,9 +61,12 @@
 
 <main class="border-gray-700 w-full border-x min-h-[100vh]">
   <Post
+    id={data?.post?.id}
     author={data?.post?.user?.name}
     nickname={data?.post?.user?.nickname}
     content={data?.post?.content}
+    likesCount={data?.post?.likesCount}
+    isLiked={data?.post?.isLiked}
   />
 
   <!-- svelte-ignore a11y-click-events-have-key-events -->
