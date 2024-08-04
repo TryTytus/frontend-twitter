@@ -1,11 +1,12 @@
 <script lang="ts">
   import PostCard from "$lib/custom/blocs/post/post-card.svelte";
   import TextCard from "$lib/custom/blocs/text-card/text-card.svelte";
-  import InfiniteScroll from "svelte-infinite-scroll";
+
   import Post from "$lib/custom/blocs/post/post.svelte";
 
   import type { PageServerData } from "./$types";
   import { onMount } from "svelte";
+  import Separator from "$lib/components/ui/separator/separator.svelte";
 
   export let data: PageServerData;
 
@@ -36,6 +37,7 @@
 <div class="m-auto">
   <main class="grid grid-cols-1 w-full lg:max-w-[70rem] -mt-4">
     {#if data.posts}
+    
     {#each data.posts as post}
       <!-- {JSON.stringify(post)} -->
       <TextCard
@@ -45,6 +47,9 @@
         content={post.content}
         isLiked={post.isLiked}
         likesCount={post.likesCount}
+        commentsCount={post.commentsCount}
+        viewsCount={post.viewsCont}
+        isBookmarked={post.isBookmarked}
       />
     {/each}
 

@@ -28,29 +28,38 @@
         architecto nobis fugiat saepe magni, amet harum.
   `;
   export let isLiked = false;
+  export let isBookmarked = false;
   export let likesCount = 0;
-
+  export let commentsCount = 0;
+  export let viewsCount = 0;
+  export let profile = false
 
   async function handleLike() {
     if (!isLiked) {
       isLiked = true;
       likesCount++;
       await fetch(`http://localhost:3000/post-likes/like/${id}`, {
-        method: 'POST'
-      })
+        method: "POST",
+      });
     } else {
       isLiked = false;
       likesCount--;
       await fetch(`http://localhost:3000/post-likes/dislike/${id}`, {
-        method: 'POST'
+        method: "POST",
       });
     }
   }
 
+  async function handleBookmark() {
+    await fetch(`http://localhost:3000/bookmark/${id}`, {
+      method: !isBookmarked ? "POST" : "DELETE",
+    });
+    isBookmarked = !isBookmarked;
+  }
 </script>
 
 <a data-sveltekit-preload-data="off" href={`/status/${id}`} class="w-full px-4">
-  <Card.Root class=" border-t-0 lg:w-[600px] rounded-none">
+  <Card.Root class={`border-t-0 rounded-none ${profile ? 'border-x-0' : 'lg:w-[600px]'}`}>
     <Card.Header class="pb-1">
       <div class="flex items-center gap-3">
         <Avatar.Root>
@@ -74,26 +83,30 @@
     >
       <div class="flex items-center gap-2 hover:text-blue-400">
         <MessageCircle class="w-4" />
-        0
+        {commentsCount}
       </div>
       <div class="flex items-center gap-2 hover:text-green-400">
         <Repeat class=" w-4" />
         0
       </div>
-      <button on:click={handleLike}
+      <button
+        on:click={handleLike}
         class={`flex items-center gap-2 ${isLiked ? "text-pink-500" : "hover:text-pink-500"}`}
       >
         <Heart class={`w-4 ${isLiked ? "fill-pink-500" : ""}`} />
         {likesCount}
-    </button>
+      </button>
       <div class="flex items-center gap-2 hover:text-blue-400">
         <BarChart2 class="w-4" />
-        0
+        {viewsCount}
       </div>
-      <div class="flex items-center gap-4">
-        <Bookmark class=" w-4 hover:text-blue-400" />
-        <Download class=" w-4 hover:text-blue-400" />
-      </div>
+
+      <button
+        on:click={handleBookmark}
+        class={`flex items-center gap-2 ${isBookmarked ? "text-blue-400" : "hover:text-blue-400"}`}
+      >
+        <Bookmark class={`w-4 ${isBookmarked ? "fill-blue-400" : ""}`} />
+      </button>
     </Card.Footer>
   </Card.Root>
 </a>

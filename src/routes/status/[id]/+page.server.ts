@@ -12,6 +12,11 @@ export let load: PageServerLoad = async ({cookies, params}) => {
                 Authorization: `Bearer ${token}`,
             }
         }).then(res => res.json()),
-        comments: await fetch(`http://localhost:3000/comment/${params.id}`).then(res => res.json())
+        comments: await fetch(`http://localhost:3000/comment/${params.id}`).then(res => res.json()),
+        likes: await fetch('http://localhost:3000/comment-likes', {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        }).then(res => res.json())
     }
 };

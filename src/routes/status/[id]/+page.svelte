@@ -9,9 +9,19 @@
   import Button from "$lib/components/ui/button/button.svelte";
   import { page } from "$app/stores";
 
+  import { username } from "$lib/stores/username";
   import { onMount } from "svelte";
+  import { writable } from "svelte/store";
+  import { commentLikes } from "$lib/stores/commentLikes";
 
   export let data: PageData;
+
+
+ 
+  console.log(data.likes.map(like => like.commentInfoId.trim()))
+
+  commentLikes.set(new Set(data.likes.map(like => like.commentInfoId.trim())))
+
 
   let onReply = async () => {
     await fetch(`http://localhost:3000/comment?postId=${$page.params.id}`, {
@@ -21,14 +31,13 @@
       },
       body: JSON.stringify({
         content: value,
-        name: "name",
       }),
     });
 
     data.comments = [
       {
         content: value,
-        name: "name",
+        name: await sessionStorage.getItem('username')
       },
       ...data.comments,
     ];
@@ -51,7 +60,16 @@
     event.stopPropagation();
   };
 
-  onMount(() => {
+
+
+  onMount(async () => {
+
+
+
+    username.set(await sessionStorage.getItem('username'))
+
+
+
     document.addEventListener("click", handleClick);
     return () => {
       document.removeEventListener("click", handleClick);
@@ -67,6 +85,10 @@
     content={data?.post?.content}
     likesCount={data?.post?.likesCount}
     isLiked={data?.post?.isLiked}
+    commentsCount={data?.post?.commentsCount}
+    viewsCount={data?.post?.viewsCont}
+    isBookmarked={data?.post?.isBookmarked}
+    createdAt={data?.post?.createdAt}
   />
 
   <!-- svelte-ignore a11y-click-events-have-key-events -->

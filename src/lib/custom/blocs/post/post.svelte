@@ -3,6 +3,9 @@
 
   import PostNav from "./post-nav.svelte";
   import PostHeader from "./post-header.svelte";
+  import moment from 'moment';
+  import { onMount } from "svelte";
+
 
   export let id = 3;
   export let author = "Elon Musk";
@@ -22,6 +25,10 @@
 
   export let isLiked = false;
   export let likesCount = 0;
+  export let commentsCount = 0;
+  export let isBookmarked = 0;
+  export let createdAt: any;
+
 </script>
 
 <PostHeader />
@@ -52,9 +59,9 @@
 </h2>
 
 <div class="flex text-sm mx-2 lg:mx-6 text-muted-foreground">
-  <p>5:04 AM · Jul 8, 2024 ·</p>
-  <p class="text-white">&nbsp;{viewsCount}K&nbsp;</p>
+  <p>{moment(createdAt).format('DD MMMM YYYY · h:mm A')} ·</p>
+  <p class="text-white">&nbsp;{viewsCount}&nbsp;</p>
   <p>Views</p>
 </div>
 
-<PostNav {id} {isLiked} {likesCount} />
+<PostNav {id} {isLiked} {likesCount} {commentsCount} {viewsCount} {isBookmarked} />

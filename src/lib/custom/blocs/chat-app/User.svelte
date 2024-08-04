@@ -10,8 +10,7 @@
   const dispatch = createEventDispatcher();
 
   const onClick = () => {
-    selectedUser = user;
-    dispatch("SelectedUser");
+    dispatch("SelectedUser", { user });
   };
 
   const status = () => {
@@ -34,7 +33,7 @@
     <div class="description">
       <p class="text-lg">{user.username} {user.self ? " (yourself)" : ""}</p>
       <div>
-        <StatusIcon connected={user.connected} />{status()}
+        <StatusIcon connected={user.connected} />{user.connected ? "online" : "offline"}
       </div>
     </div>
     {#if user.hasNewMessages}

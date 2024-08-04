@@ -20,24 +20,13 @@
   let userId: string | null = null;
   let user: any;
 
-  onMount(async () => {
-    session = await Session.doesSessionExist();
-    if (session) {
-      userId = await Session.getUserId();
-      // setContext("userId", null);
-      user = await fetch(`http://localhost:3000/user/${userId}`)
-        .then((res) => res.json())
-        .catch((e) => console.error(e));
 
-      if (user !== undefined) goto("/");
-    } else goto("/auth");
-  });
 
   let name = "";
   let nickname = "";
 
   let submitForm = async () => {
-    if (userId !== null)
+
       await fetch("http://localhost:3000/user", {
         method: "POST",
         headers: {

@@ -25,7 +25,6 @@
 
         body: JSON.stringify({
           content: value,
-          name: "jas",
         }),
       }
     ).then(res => res.json())
@@ -34,6 +33,8 @@
 
     console.log(await res);
   };
+
+
 </script>
 
 <!-- <div class="h-28 w-80 border rounded-2xl">

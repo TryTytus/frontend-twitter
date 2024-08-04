@@ -3,20 +3,28 @@
   import TreeNodeNav from "./tree-node-nav.svelte";
   import TreeComment from "./tree-comment.svelte";
 
+  import { username } from "$lib/stores/username";
+
+
   export let node;
-  export let index;
+  export let index: number;
   export let depth = 0;
   export let path: string;
+  export let likes: string[];
 
   let showChildren = true;
   let replyBox = false;
 
+  let name: string;
+
+username.subscribe((val:string) => name = val)
+
   let replayBoxSwitch = () => (replyBox = !replyBox);
 
-  export const handle = (content: string) => {
+  export const handle = async (content: string) => {
       node.comments = [
         {
-          name: "name",
+          name,
           content,
         },
         ...node.comments,
@@ -37,6 +45,9 @@
         bind:replyBox
         bind:showChildren
         commentsSize={node?.comments?.length}
+        path={path}
+        _id={node?._id}
+        likesCount={node?.likesCount}
       />
       <TreeComment {handle} {path} {replyBox} />
     </div>
