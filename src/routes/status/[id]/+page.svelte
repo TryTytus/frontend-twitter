@@ -17,7 +17,7 @@
   export let data: PageData;
 
 
- 
+
   console.log(data.likes.map(like => like.commentInfoId.trim()))
 
   commentLikes.set(new Set(data.likes.map(like => like.commentInfoId.trim())))
@@ -89,6 +89,7 @@
     viewsCount={data?.post?.viewsCont}
     isBookmarked={data?.post?.isBookmarked}
     createdAt={data?.post?.createdAt}
+    avatar={data?.post?.user?.avatar}
   />
 
   <!-- svelte-ignore a11y-click-events-have-key-events -->

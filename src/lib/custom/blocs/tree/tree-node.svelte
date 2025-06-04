@@ -27,7 +27,7 @@ username.subscribe((val:string) => name = val)
       node.comments = []
 
     if (name === undefined)
-      name = "kuzka"
+      name = ""
 
       node.comments = [
         {

@@ -21,6 +21,8 @@
   quasi? Facere doloremque obcaecati sunt architecto nobis fugiat saepe magni,
   amet harum.`;
 
+  export let avatar: string = "https://github.com/shadcn.png";
+
   export let viewsCount = 118;
 
   export let isLiked = false;
@@ -37,8 +39,8 @@
   <div class="flex z-0 items-center gap-3">
     <Avatar.Root>
       <Avatar.Image
-        class="avatar"
-        src="https://github.com/shadcn.png"
+        class="avatar object-cover"
+        src={avatar ? `http://localhost:3000/${avatar}` : "https://github.com/shadcn.png"}
         alt="@shadcn"
       />
       <Avatar.Fallback>CNN</Avatar.Fallback>

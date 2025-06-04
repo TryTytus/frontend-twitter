@@ -13,7 +13,6 @@
 
   export let id = "3";
   export let author = "Elon Musk";
-  let avatar = "/morty.jpeg";
   export let nickname = "elonmusk";
   export let content = `
   Lorem ipsum dolor, sit amet consectetur adipisicing elit. Adipisci
@@ -33,6 +32,8 @@
   export let commentsCount = 0;
   export let viewsCount = 0;
   export let profile = false
+
+  export let avatar: string = "";
 
   async function handleLike() {
     if (!isLiked) {
@@ -63,7 +64,7 @@
     <Card.Header class="pb-1">
       <div class="flex items-center gap-3">
         <Avatar.Root>
-          <Avatar.Image class="z-0" src="/morty.jpeg" alt="@shadcn" />
+          <Avatar.Image class="z-0 object-cover" src={avatar ? `http://localhost:3000/${avatar}` : "https://github.com/shadcn.png"} alt="@shadcn" />
           <Avatar.Fallback>CNN</Avatar.Fallback>
         </Avatar.Root>
         <div>

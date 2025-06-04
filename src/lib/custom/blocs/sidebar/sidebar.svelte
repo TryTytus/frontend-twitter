@@ -50,14 +50,14 @@
           <Search class="w-4" />
           Explore
         </SidebarButton>
-        <SidebarButton>
+        <!-- <SidebarButton>
           <Bell class="w-4" />
           Notifications
         </SidebarButton>
         <SidebarButton  on:click={() => goto('/chat')}>
           <Mail class="w-4" />
           Messages
-        </SidebarButton>
+        </SidebarButton> -->
         <SidebarButton on:click={() => goto('/bookmarks')}>
           <BookmarkIcon class="w-4" />
           Bookmarks

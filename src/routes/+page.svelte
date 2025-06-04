@@ -50,6 +50,7 @@
         commentsCount={post.commentsCount}
         viewsCount={post.viewsCont}
         isBookmarked={post.isBookmarked}
+        avatar={post.user.avatar}
       />
     {/each}
 

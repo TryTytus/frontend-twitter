@@ -12,8 +12,12 @@
 </script>
 
 <div class="grid w-full border-x">
-  <div class="w-full h-52 bg-muted rounded-b-xl">
-    <CircleUser class="w-36  h-36 mt-36 ml-10 bg-gray-500 rounded-full" />
+  <div class="w-full h-52 rounded-b-xl" class:bg-muted={!data?.user?.bgimg} style={data?.user?.bgimg ? `background-image: url(http://localhost:3000/${data.user.bgimg}); background-size: cover; background-position: center; background-repeat: no-repeat;` : ''}>
+    {#if data?.user?.avatar}
+    <img src={"http://localhost:3000/" + data?.user?.avatar} class="w-36  h-36 mt-28 ml-10 bg-gray-500 rounded-full object-cover z-50" alt="" />
+    {:else}
+    <CircleUser class="w-36  h-36 mt-36 ml-10 bg-gray-500 rounded-full object-cover relative" />
+    {/if}
   </div>
 
   <div class="mt-[5.4rem] ml-16">
