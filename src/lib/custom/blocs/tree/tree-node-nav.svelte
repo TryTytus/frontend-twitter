@@ -48,7 +48,7 @@
   {/if}
   <button on:click={handleLike} class={`flex items-center gap-2 `}>
     <Heart class={`w-4 ${isLiked ? "text-pink-600 fill-pink-600" : ""}`} />
-    {likesCount} likes
+    {likesCount === undefined ? 0 : likesCount} likes
   </button>
 
   <div class="w-2" />

@@ -10,7 +10,7 @@
   export let index: number;
   export let depth = 0;
   export let path: string;
-  export let likes: string[];
+  export let likes: string[] = [];
 
   let showChildren = true;
   let replyBox = false;
@@ -22,10 +22,19 @@ username.subscribe((val:string) => name = val)
   let replayBoxSwitch = () => (replyBox = !replyBox);
 
   export const handle = async (content: string) => {
+
+    if (node.comments === undefined)
+      node.comments = []
+
+    if (name === undefined)
+      name = "kuzka"
+
       node.comments = [
         {
           name,
           content,
+          likesCount: 0,
+          
         },
         ...node.comments,
       ];
@@ -52,13 +61,13 @@ username.subscribe((val:string) => name = val)
       <TreeComment {handle} {path} {replyBox} />
     </div>
   </div>
-  {#if node.comments && showChildren}
+  {#if node?.comments && showChildren}
     <div
       style={depth === 0 ? "border: 0;" : ""}
       class="ml-5 border-l border-gray-600"
       transition:slide|local
     >
-      {#each node.comments as _node, i}
+      {#each node?.comments as _node, i}
         <svelte:self
           path={path + "." + i + ".comments"}
           node={_node}
