@@ -4,6 +4,11 @@
   import ProfileUpdateDialog from "$lib/custom/blocs/profile-update-dialog/profile-update-dialog.svelte";
   import { buttonVariants } from "$lib/components/ui/button";
   import * as Dialog from "$lib/components/ui/dialog/index.js";
+
+  import type { PageServerData } from './$types';
+
+  export let data: PageServerData;
+
 </script>
 
 <div class="grid w-full border-x">
@@ -13,12 +18,12 @@
 
   <div class="mt-[5.4rem] ml-16">
     <h1 class=" text-3xl font-semibold tracking-tight transition-colors">
-      Adam Tytoń
+      {data?.user?.name}
     </h1>
-    <h2 class="text-muted-foreground">@trytytus</h2>
+    <h2 class="text-muted-foreground">@{data?.user?.nickname}</h2>
 
     <p class="mt-2 mb-4">
-      Premier Rzeczypospolitej Polskiej 🇵🇱 Prime Minister of Poland 🇵🇱
+      {data?.user?.description ?? "Add amazing bio ...🍃"}
     </p>
 
     <ProfileUpdateDialog>
@@ -29,9 +34,22 @@
   </div>
 
   <div class="border-t mt-10 w-full">
-    <div class="mx-auto inline-block -mt-6">
-      {#each Array(5).keys() as idx}
-        <TextCard profile={true} />
+    <div class="mx-auto inline-block flex flex-col gap-4">
+      {#each data?.posts as post}
+        <TextCard 
+        nickname={post.user.nickname}
+        author={post.user.name}
+        content={post.content}
+        id={post.id}
+        likesCount={post.likesCount}
+        isLiked={post.isLiked}
+        commentsCount={post.commentsCount}
+        viewsCount={post.viewsCont}
+        isBookmarked={post.isBookmarked}
+        createdAt={post.createdAt}
+        
+        
+        profile={true} />
       {/each}
     </div>
   </div>
