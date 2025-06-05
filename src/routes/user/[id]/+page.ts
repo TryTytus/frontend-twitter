@@ -27,7 +27,7 @@ interface User {
 
 export const load: PageLoad = async ({ params }): Promise<{ user: User | null; posts: Post[] | null }> => {
     return {
-        user: await fetch(`http://localhost:3000/user/${params.id}`)
+        user: await fetch(`http://localhost:3000/user/byNickname/${params.id}`)
         .then(res => res.json()),
 
         posts: await fetch(`http://localhost:3000/post`)

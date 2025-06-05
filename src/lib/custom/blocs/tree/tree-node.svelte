@@ -26,15 +26,25 @@ username.subscribe((val:string) => name = val)
     if (node.comments === undefined)
       node.comments = []
 
-    if (name === undefined)
-      name = ""
+        const bgimg = sessionStorage.getItem("bgimg") || "morty.jpeg";
+        const name = sessionStorage.getItem("username") || "Anonymous";
+
+        console.error(bgimg, name)
+
+              console.log({
+          name,
+          content,
+          likesCount: 0,
+          bgimg,
+          
+        },)
 
       node.comments = [
         {
           name,
           content,
           likesCount: 0,
-          
+          bgimg,
         },
         ...node.comments,
       ];

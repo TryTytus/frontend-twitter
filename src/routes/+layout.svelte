@@ -30,20 +30,25 @@
 
   onMount(async () => {
     const name = sessionStorage.getItem("username");
-    if (name === null) {
+    if (name === null || name == "undefined") {
       userId = await Session.getUserId();
-      const user = await fetch(`http://localhost:3000/user/${userId}`).then(
+
+      console.error(userId)
+      const user = await fetch(`http://localhost:3000/user/byId/${userId}`).then(
         (res) => res.json()
       );
       sessionStorage.setItem("username", user?.name);
       sessionStorage.setItem("nickname", user?.nickname);
+      sessionStorage.setItem("bgimg", user?.avatar || "morty.jpeg");
+
+      console.warn(user?.bgimg)
     }
 
     session = await Session.doesSessionExist();
     if (session) {
       userId = await Session.getUserId();
       setContext("userId", null);
-      user = await fetch(`http://localhost:3000/user/${userId}`)
+      user = await fetch(`http://localhost:3000/user/byId/${userId}`)
         .then(async (res) => {
           console.log(await res.json());
           return res.json();
