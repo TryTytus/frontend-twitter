@@ -6,15 +6,14 @@
   import * as SuperTokens from "supertokens-auth-react";
   import * as Session from "supertokens-auth-react/recipe/session";
   import { SuperTokensConfig } from "./auth/[...path]/config";
-
   import { browser } from "$app/environment";
   import { onMount } from "svelte";
   import { goto } from "$app/navigation";
-  // import { userId, session } from "$lib/stores/session";
   import { get } from "svelte/store";
   import { setContext } from "svelte";
-
   import { Toaster } from "$lib/components/ui/sonner";
+  import { UserRepository } from "$lib/models/user-api";
+  import User from "$lib/custom/blocs/chat-app/User.svelte";
 
   let user: any;
 
@@ -23,10 +22,6 @@
   let session = false;
   let userId: string | null = null;
 
-  // userId.subscribe((val) => (userIdValue = val));
-  // session.subscribe((val) => (sessionValue = val));
-
-  // setContext('userId', null);
 
   onMount(async () => {
     const name = sessionStorage.getItem("username");
@@ -34,9 +29,13 @@
       userId = await Session.getUserId();
 
       console.error(userId)
-      const user = await fetch(`http://localhost:3000/user/byId/${userId}`).then(
-        (res) => res.json()
-      );
+
+      
+
+      const user = await UserRepository.getUserById(userId)
+
+      console.warn(user)
+
       sessionStorage.setItem("username", user?.name);
       sessionStorage.setItem("nickname", user?.nickname);
       sessionStorage.setItem("bgimg", user?.avatar || "morty.jpeg");
@@ -44,15 +43,12 @@
       console.warn(user?.bgimg)
     }
 
+    
     session = await Session.doesSessionExist();
     if (session) {
       userId = await Session.getUserId();
       setContext("userId", null);
-      user = await fetch(`http://localhost:3000/user/byId/${userId}`)
-        .then(async (res) => {
-          console.log(await res.json());
-          return res.json();
-        })
+      user = await UserRepository.getUserById(userId)
         .catch((e) => console.error(e));
 
       } else goto("/auth");
