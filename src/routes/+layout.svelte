@@ -9,49 +9,33 @@
   import { browser } from "$app/environment";
   import { onMount } from "svelte";
   import { goto } from "$app/navigation";
-  import { get } from "svelte/store";
   import { setContext } from "svelte";
   import { Toaster } from "$lib/components/ui/sonner";
-  import { UserRepository } from "$lib/models/user-api";
-  import User from "$lib/custom/blocs/chat-app/User.svelte";
-
-  let user: any;
+  import { UserViewModel } from "$lib/viewmodels/user-viewmodel";
 
   if (browser) SuperTokens.init(SuperTokensConfig);
+
+  const userViewModel = new UserViewModel();
+  const { currentUser, loading, error } = userViewModel;
 
   let session = false;
   let userId: string | null = null;
 
+  setContext("userViewModel", userViewModel);
 
   onMount(async () => {
-    const name = sessionStorage.getItem("username");
-    if (name === null || name == "undefined") {
-      userId = await Session.getUserId();
-
-      console.error(userId)
-
-      
-
-      const user = await UserRepository.getUserById(userId)
-
-      console.warn(user)
-
-      sessionStorage.setItem("username", user?.name);
-      sessionStorage.setItem("nickname", user?.nickname);
-      sessionStorage.setItem("bgimg", user?.avatar || "morty.jpeg");
-
-      console.warn(user?.bgimg)
-    }
-
-    
     session = await Session.doesSessionExist();
+    
     if (session) {
       userId = await Session.getUserId();
-      setContext("userId", null);
-      user = await UserRepository.getUserById(userId)
-        .catch((e) => console.error(e));
-
-      } else goto("/auth");
+      setContext("userId", userId);
+      
+      if (userId) {
+        await userViewModel.loadCurrentUser(userId);
+      }
+    } else {
+      goto("/auth");
+    }
   });
 </script>
 
@@ -60,7 +44,7 @@
     <Sidebar class="hidden lg:block sticky top-0 max-h-[200px]" />
     <div class="w-full col-span-3 flex">
       <Toaster />
-      <slot {userId} />
+      <slot {userId} user={$currentUser} />
     </div>
   </div>
 

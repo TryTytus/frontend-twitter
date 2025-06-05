@@ -1,3 +1,4 @@
+import type { User } from "./user";
 
 
 export class UserRepository {
@@ -7,6 +8,20 @@ export class UserRepository {
             const response = await fetch(`http://localhost:3000/user/byId/${userId}`);
             if (!response.ok) {
                 throw new Error(`Error fetching user with ID ${userId}: ${response.statusText}`);
+            }
+            return await response.json();
+        } catch (error) {
+            console.error(error);
+            return null;
+        }
+    }
+
+
+    static async getUserByNickname(nickname: string): Promise<User | null> {
+        try {
+            const response = await fetch(`http://localhost:3000/user/byNickname/${nickname}`);
+            if (!response.ok) {
+                throw new Error(`Error fetching user with nickname ${nickname}: ${response.statusText}`);
             }
             return await response.json();
         } catch (error) {

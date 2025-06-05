@@ -27,7 +27,7 @@
     <h2 class="text-muted-foreground">@{data?.user?.nickname}</h2>
 
     <p class="mt-2 mb-4">
-      {data?.user?.description ?? "Add amazing bio ...🍃"}
+      {data?.user?.bio ?? "Add amazing bio ...🍃"}
     </p>
 
     <ProfileUpdateDialog>

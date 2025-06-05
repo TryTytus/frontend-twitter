@@ -1,36 +1,12 @@
+import type { PostWithUser } from "$lib/models/post";
+import { PostRepository } from "$lib/models/post_repository";
+import { UserRepository } from "$lib/models/user-api";
 import type { PageLoad } from "./$types";
+import type { User } from "$lib/models/user";
 
-interface PostUser {
-  nickname: string;
-  name: string;
-}
-
-interface Post {
-  id: string; 
-  user: PostUser;
-  content: string;
-  likesCount: number;
-  isLiked: boolean;
-  commentsCount: number;
-  viewsCont: number; 
-  isBookmarked: boolean;
-  createdAt: string; 
-}
-
-interface User {
-  bgimg?: string;
-  avatar?: string;
-  name: string;
-  nickname: string;
-  description?: string;
-}
-
-export const load: PageLoad = async ({ params }): Promise<{ user: User | null; posts: Post[] | null }> => {
+export const load: PageLoad = async ({ params }): Promise<{ user: User | null; posts: PostWithUser[] | [] }> => {
     return {
-        user: await fetch(`http://localhost:3000/user/byNickname/${params.id}`)
-        .then(res => res.json()),
-
-        posts: await fetch(`http://localhost:3000/post`)
-        .then(res => res.json())
+        user: await UserRepository.getUserByNickname(params.id),
+        posts: await PostRepository.getPostsWithUser(0)
     }
 }

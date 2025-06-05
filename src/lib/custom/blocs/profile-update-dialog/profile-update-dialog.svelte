@@ -6,12 +6,18 @@
   import Separator from "$lib/components/ui/separator/separator.svelte";
   import Textarea from "$lib/components/ui/textarea/textarea.svelte";
   import FileUpload from "$lib/custom/file-upload/file-upload.svelte";
+  import type { UserViewModel } from "$lib/viewmodels/user-viewmodel";
   import * as Session from "supertokens-auth-react/recipe/session";
+  import { getContext } from "svelte";
 
 
   let avatar: FileList;
   let bgImg: FileList;
   let bio = "";
+
+
+  let userViewModel: UserViewModel = getContext("userViewModel");
+
 
   async function handleSubmit() {
     const formData = new FormData();
@@ -19,11 +25,7 @@
     formData.append("bgImg", bgImg[0]);
     formData.append("bio", bio);
 
-    const res = await fetch("http://localhost:3000/user/updateProfile", {
-      method: "POST",
-      body: formData,
-      credentials: 'include'
-    });
+    userViewModel.updateProfile(formData)
   }
 </script>
 
