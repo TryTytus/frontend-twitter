@@ -13,10 +13,18 @@
   import { onMount } from "svelte";
   import { writable } from "svelte/store";
   import { commentLikes } from "$lib/stores/commentLikes";
+  import { CommentViewModel } from "$lib/viewmodels/comment-viewmodel";
+  import { CommentRepository } from "$lib/models/comment_repository";
+
+
+  import { comments } from "$lib/stores/commnets";
 
   export let data: PageData;
 
 
+  comments.set(data?.comments || []);
+
+  let commentViewModel = new CommentViewModel(data?.post?.id);
 
   console.log(data.likes.map(like => like.commentInfoId.trim()))
 
@@ -34,14 +42,18 @@
       }),
     });
 
-    data.comments = [
-      {
-        content: value,
-        name: await sessionStorage.getItem('username')
-      },
-      ...data.comments,
-    ];
+    // $comments = [
+    //   {
+    //     content: value,
+    //     name: await sessionStorage.getItem('username'),
+    //     bgimg: await sessionStorage.getItem('bgimg') || "morty.jpeg",
+    //     likesCount: 0,
+    //   },
+    //   ...$comments,
+    // ];
     value = "";
+
+    comments.set(await CommentRepository.getCommentsByPostId($page.params.id));
   };
 
   let value = "";
@@ -63,7 +75,6 @@
 
 
   onMount(async () => {
-
 
 
     username.set(await sessionStorage.getItem('username'))
@@ -114,7 +125,7 @@
   </div>
 
   <div class="mb-6">
-    <Tree tree={data?.comments} let:node>
+    <Tree tree={$comments} let:node>
       <CommentSection {node} />
     </Tree>
   </div>

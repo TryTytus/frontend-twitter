@@ -173,7 +173,6 @@
       <Tabs.Trigger on:click={goTop} value="top">Top</Tabs.Trigger>
       <Tabs.Trigger on:click={goLatest} value="latest">Latest</Tabs.Trigger>
       <Tabs.Trigger on:click={goPeople} value="people">People</Tabs.Trigger>
-      <Tabs.Trigger value="media">Media</Tabs.Trigger>
     </Tabs.List>
     <Tabs.Content value="top">
       <div>

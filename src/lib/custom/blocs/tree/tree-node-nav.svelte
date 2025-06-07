@@ -2,6 +2,8 @@
   import { MessageCircle, Heart, CircleMinus, CirclePlus } from "lucide-svelte";
   import { page } from "$app/stores";
   import { commentLikes } from "$lib/stores/commentLikes";
+  import { comments } from "$lib/stores/commnets";
+  import { CommentRepository } from "$lib/models/comment_repository";
 
   export let commentsSize = 0;
   export let showChildren = true;
@@ -25,12 +27,14 @@
     ).then((res) => res.json());
     likes.delete(_id);
     commentLikes.set(likes);
-    isLiked ? likesCount-- : likesCount++;
     isLiked = !isLiked;
     
+    comments.set(await CommentRepository.getCommentsByPostId($page.params.id));
   };
 
   let isLiked = likes.has(_id);
+
+  
 </script>
 
 <div class="flex -mx-[0.2rem] mt-3 gap-2 text-xs items-center">

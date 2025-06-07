@@ -4,6 +4,11 @@
   import TreeComment from "./tree-comment.svelte";
 
   import { username } from "$lib/stores/username";
+  import { comments } from "$lib/stores/commnets";
+  import { CommentRepository } from "$lib/models/comment_repository";
+  import { page } from '$app/stores';
+
+
 
 
   export let node;
@@ -23,6 +28,9 @@ username.subscribe((val:string) => name = val)
 
   export const handle = async (content: string) => {
 
+    console.error('pipa', node)
+    console.error("dupa", node.likesCount)
+
     if (node.comments === undefined)
       node.comments = []
 
@@ -31,13 +39,15 @@ username.subscribe((val:string) => name = val)
 
         console.error(bgimg, name)
 
-              console.log({
+        console.log({
           name,
           content,
           likesCount: 0,
           bgimg,
           
         },)
+
+        // console.log(node.comments, content, name, bgimg)
 
       node.comments = [
         {
@@ -48,6 +58,14 @@ username.subscribe((val:string) => name = val)
         },
         ...node.comments,
       ];
+
+      console.error("pupa", node.likesCount)
+
+
+
+      comments.set(await CommentRepository.getCommentsByPostId($page.params.id));
+      
+
   };
 </script>
 

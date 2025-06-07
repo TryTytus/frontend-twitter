@@ -12,6 +12,7 @@
   import { setContext } from "svelte";
   import { Toaster } from "$lib/components/ui/sonner";
   import { UserViewModel } from "$lib/viewmodels/user-viewmodel";
+  import { UserRepository } from "$lib/models/user-api";
 
   if (browser) SuperTokens.init(SuperTokensConfig);
 
@@ -29,7 +30,11 @@
     if (session) {
       userId = await Session.getUserId();
       setContext("userId", userId);
-      
+      const user = await UserRepository.getUserById(userId);
+            sessionStorage.setItem("username", user?.name || "");
+            sessionStorage.setItem("nickname", user?.nickname || "");
+            sessionStorage.setItem("bgimg", user?.avatar || "morty.jpeg");
+
       if (userId) {
         await userViewModel.loadCurrentUser(userId);
       }
