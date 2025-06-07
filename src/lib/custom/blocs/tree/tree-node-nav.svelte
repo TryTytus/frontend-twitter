@@ -18,13 +18,7 @@
 
   let handleLike = async () => {
     replyBox = false;
-    const type = isLiked ? "dislike" : "like";
-    const res = await fetch(
-      `http://localhost:3000/comment/${type}?path=${path}&postId=${$page.params.id}`,
-      {
-        method: "POST",
-      }
-    ).then((res) => res.json());
+    await CommentRepository.toggleCommentLike(path, $page.params.id, isLiked);
     likes.delete(_id);
     commentLikes.set(likes);
     isLiked = !isLiked;

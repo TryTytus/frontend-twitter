@@ -2,6 +2,7 @@
   import Button from "$lib/components/ui/button/button.svelte";
   import Textarea from "$lib/components/ui/textarea/textarea.svelte";
   import { page } from "$app/stores";
+  import { CommentRepository } from "$lib/models/comment_repository";
 
 
   export let replyBox = true;
@@ -15,32 +16,15 @@
 
   let sendComment = async () => {
     replyBox = false
-    const res = await fetch(
-      `http://localhost:3000/comment?path=${path}&postId=${$page.params.id}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-
-        body: JSON.stringify({
-          content: value,
-        }),
-      }
-    ).then(res => res.json())
+    await CommentRepository.addComment($page.params.id, value, path)
 
     handle(value)
 
-    console.log(await res);
   };
 
 
 </script>
 
-<!-- <div class="h-28 w-80 border rounded-2xl">
-
-
-</div> -->
 {#if replyBox}
   <div class="ml-2 mt-2 w-80">
     <Textarea bind:value class="h-24 max-h-40 rounded-3xl" />

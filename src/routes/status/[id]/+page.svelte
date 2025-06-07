@@ -32,25 +32,7 @@
 
 
   let onReply = async () => {
-    await fetch(`http://localhost:3000/comment?postId=${$page.params.id}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        content: value,
-      }),
-    });
-
-    // $comments = [
-    //   {
-    //     content: value,
-    //     name: await sessionStorage.getItem('username'),
-    //     bgimg: await sessionStorage.getItem('bgimg') || "morty.jpeg",
-    //     likesCount: 0,
-    //   },
-    //   ...$comments,
-    // ];
+    await CommentRepository.addTopComment($page.params.id, value);
     value = "";
 
     comments.set(await CommentRepository.getCommentsByPostId($page.params.id));
@@ -75,10 +57,9 @@
 
 
   onMount(async () => {
-
+    commentViewModel.setComments(comments);
 
     username.set(await sessionStorage.getItem('username'))
-
 
 
     document.addEventListener("click", handleClick);

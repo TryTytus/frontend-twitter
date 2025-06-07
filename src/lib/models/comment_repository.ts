@@ -40,7 +40,7 @@ export class CommentRepository {
     }
   }
 
-  static async addComment(postId: string, content: string, path?: string): Promise<Comment | null> {
+  static async addComment(postId: string, value: string, path?: string): Promise<Comment | null> {
     try {
       const url = path 
         ? `http://localhost:3000/comment?path=${path}&postId=${postId}`
@@ -49,7 +49,7 @@ export class CommentRepository {
       const response = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ content }),
+        body: JSON.stringify({ content: value }),
         credentials: 'include'
       });
       
@@ -57,6 +57,25 @@ export class CommentRepository {
       return await response.json();
     } catch (error) {
       console.error('Error adding comment:', error);
+      return null;
+    }
+  }
+
+  static async addTopComment(postId: string, content: string): Promise<Comment | null> {
+    try {
+      const response = await fetch(`http://localhost:3000/comment?postId=${postId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          content,
+        }),
+      });
+      if (!response.ok) throw new Error(`Error: ${response.statusText}`);
+      return await response.json();
+    } catch (error) {
+      console.error('Error adding top comment:', error);
       return null;
     }
   }
