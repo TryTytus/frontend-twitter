@@ -5,7 +5,7 @@ export class UserRepository {
 
     static async getUserById(userId: string): Promise<User | null> {
         try {
-            const response = await fetch(`http://localhost:3000/user/byId/${userId}`);
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/user/byId/${userId}`);
             if (!response.ok) {
                 throw new Error(`Error fetching user with ID ${userId}: ${response.statusText}`);
             }
@@ -19,7 +19,7 @@ export class UserRepository {
 
     static async getUserByNickname(nickname: string): Promise<User | null> {
         try {
-            const response = await fetch(`http://localhost:3000/user/byNickname/${nickname}`);
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/user/byNickname/${nickname}`);
             if (!response.ok) {
                 throw new Error(`Error fetching user with nickname ${nickname}: ${response.statusText}`);
             }

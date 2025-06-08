@@ -5,7 +5,7 @@ export class PostRepository {
     skip = 0,
     token?: string
   ): Promise<PostWithUser[] | []> {
-    return fetch(`http://localhost:3000/post?skip=${skip}`, {
+    return fetch(`${import.meta.env.VITE_BACKEND_URL}/post?skip=${skip}`, {
       credentials: "include",
     })
       .then((res) => {
@@ -21,7 +21,7 @@ export class PostRepository {
   }
 
   static getPostById(id: string, token?: string): Promise<PostWithUser | null> {
-    return fetch(`http://localhost:3000/post/${id}`, {
+    return fetch(`${import.meta.env.VITE_BACKEND_URL}/post/${id}`, {
       credentials: "include",
       headers: token ? { Authorization: `Bearer ${token}` } : {},
     })
@@ -39,6 +39,25 @@ export class PostRepository {
       });
   }
 
+    static getPostsWithUserByNickname(
+    userId: string,
+    token?: string
+  ): Promise<PostWithUser[] | []> {
+    return fetch(`${import.meta.env.VITE_BACKEND_URL}/user/posts/${userId}`, {
+      credentials: "include",
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`Error fetching posts: ${res.statusText}`);
+        }
+        return res.json();
+      })
+      .catch((error) => {
+        console.error(error);
+        return [];
+      });
+  }
+
   static async likePost(
     postId: number,
     dislike = false,
@@ -46,7 +65,7 @@ export class PostRepository {
   ): Promise<void | null> {
     try {
       const type = dislike ? "dislike" : "like";
-      await fetch(`http://localhost:3000/post-likes/${type}/${postId}`, {
+      await fetch(`${import.meta.env.VITE_BACKEND_URL}/post-likes/${type}/${postId}`, {
         method: "POST",
         credentials: "include",
         headers: token ? { Authorization: `Bearer ${token}` } : {},
@@ -63,7 +82,7 @@ export class PostRepository {
     token?: string
   ): Promise<void | null> {
     try {
-      await fetch(`http://localhost:3000/bookmark/${postId}`, {
+      await fetch(`${import.meta.env.VITE_BACKEND_URL}/bookmark/${postId}`, {
         method: !isBookmarked ? "POST" : "DELETE",
       });
     } catch (error) {
@@ -73,7 +92,7 @@ export class PostRepository {
   }
 
   static async addPost(content: string, token?: string) {
-    const response = await fetch("http://localhost:3000/post", {
+    const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/post`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

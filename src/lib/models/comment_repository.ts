@@ -14,7 +14,7 @@ export interface CommentLike {
 export class CommentRepository {
   static async getCommentsByPostId(postId: string, token?: string): Promise<Comment[]> {
     try {
-      const response = await fetch(`http://localhost:3000/comment/${postId}`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/comment/${postId}`, {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
         credentials: 'include'
       });
@@ -28,7 +28,7 @@ export class CommentRepository {
 
   static async getCommentLikes(token?: string): Promise<CommentLike[]> {
     try {
-      const response = await fetch('http://localhost:3000/comment-likes', {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/comment-likes`, {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
         credentials: 'include'
       });
@@ -43,8 +43,8 @@ export class CommentRepository {
   static async addComment(postId: string, value: string, path?: string): Promise<Comment | null> {
     try {
       const url = path 
-        ? `http://localhost:3000/comment?path=${path}&postId=${postId}`
-        : `http://localhost:3000/comment?postId=${postId}`;
+        ? `${import.meta.env.VITE_BACKEND_URL}/comment?path=${path}&postId=${postId}`
+        : `${import.meta.env.VITE_BACKEND_URL}/comment?postId=${postId}`;
       
       const response = await fetch(url, {
         method: 'POST',
@@ -63,7 +63,7 @@ export class CommentRepository {
 
   static async addTopComment(postId: string, content: string): Promise<Comment | null> {
     try {
-      const response = await fetch(`http://localhost:3000/comment?postId=${postId}`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/comment?postId=${postId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -83,7 +83,7 @@ export class CommentRepository {
   static async toggleCommentLike(path: string, postId: string, isLiked: boolean): Promise<boolean> {
     try {
       const type = isLiked ? 'dislike' : 'like';
-      const response = await fetch(`http://localhost:3000/comment/${type}?path=${path}&postId=${postId}`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/comment/${type}?path=${path}&postId=${postId}`, {
         method: 'POST',
         credentials: 'include'
       });

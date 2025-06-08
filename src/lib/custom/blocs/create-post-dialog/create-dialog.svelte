@@ -7,6 +7,7 @@
   import { Bird } from "lucide-svelte";
   import * as Session from "supertokens-auth-react/recipe/session";
   import { toast } from "svelte-sonner";
+  import { page } from "$app/stores";
 
   let content = "";
 
@@ -17,6 +18,10 @@
     content = "";
     dialogSwitch();
     toast("Tweet created");
+    
+    if ($page.url.pathname === "/") {
+      window.location.reload();
+    }
   };
 
   let dialogSwitch = () => (dialogOpen = !dialogOpen);

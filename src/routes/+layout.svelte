@@ -26,14 +26,22 @@
 
   onMount(async () => {
     session = await Session.doesSessionExist();
+    console.info('Session exists:', session);
     
     if (session) {
       userId = await Session.getUserId();
-      setContext("userId", userId);
+      console.info('UserId:', userId);
+      // setContext("userId", userId);
       const user = await UserRepository.getUserById(userId);
-            sessionStorage.setItem("username", user?.name || "");
-            sessionStorage.setItem("nickname", user?.nickname || "");
-            sessionStorage.setItem("bgimg", user?.avatar || "morty.jpeg");
+      if (!user) {
+        goto("/getStarted");
+      }
+
+      console.info('User:', user);
+
+      sessionStorage.setItem("username", user?.name!);
+      sessionStorage.setItem("nickname", user?.nickname!);
+      sessionStorage.setItem("bgimg", user?.avatar!);
 
       if (userId) {
         await userViewModel.loadCurrentUser(userId);

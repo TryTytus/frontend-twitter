@@ -6,7 +6,7 @@
 
 <div class="flex gap-3 w-full">
   <Avatar.Root style="width: 2rem; height: 2rem;">
-    <Avatar.Image src={node?.bgimg ? `http://localhost:3000/${node.bgimg}` : "https://github.com/shadcn.png"} alt="@shadcn" />
+    <Avatar.Image src={node?.bgimg ? `${import.meta.env.VITE_BACKEND_URL}/${node.bgimg}` : "https://github.com/shadcn.png"} alt="@shadcn" />
     <Avatar.Fallback>CNN</Avatar.Fallback>
   </Avatar.Root>
   <h1 class="  pt-1 font-bold leading-none tracking-tight">{node?.name}</h1>

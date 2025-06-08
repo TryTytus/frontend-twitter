@@ -34,6 +34,8 @@
         },
         body: JSON.stringify({ id: userId, name, nickname }),
       });
+
+      goto("/");
   };
 </script>
 

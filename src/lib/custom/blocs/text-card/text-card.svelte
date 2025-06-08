@@ -43,20 +43,20 @@
     if (!isLiked) {
       isLiked = true;
       likesCount++;
-      await fetch(`http://localhost:3000/post-likes/like/${id}`, {
+      await fetch(`${import.meta.env.VITE_BACKEND_URL}/post-likes/like/${id}`, {
         method: "POST",
       });
     } else {
       isLiked = false;
       likesCount--;
-      await fetch(`http://localhost:3000/post-likes/dislike/${id}`, {
+      await fetch(`${import.meta.env.VITE_BACKEND_URL}/post-likes/dislike/${id}`, {
         method: "POST",
       });
     }
   }
 
   async function handleBookmark() {
-    await fetch(`http://localhost:3000/bookmark/${id}`, {
+    await fetch(`${import.meta.env.VITE_BACKEND_URL}/bookmark/${id}`, {
       method: !isBookmarked ? "POST" : "DELETE",
     });
     isBookmarked = !isBookmarked;
@@ -68,7 +68,7 @@
     <Card.Header class="pb-1">
       <div class="flex items-center gap-3">
         <Avatar.Root>
-          <Avatar.Image class="z-0 object-cover" src={avatar ? `http://localhost:3000/${avatar}` : "https://github.com/shadcn.png"} alt="@shadcn" />
+          <Avatar.Image class="z-0 object-cover" src={avatar ? `${import.meta.env.VITE_BACKEND_URL}/${avatar}` : "https://github.com/shadcn.png"} alt="@shadcn" />
           <Avatar.Fallback>CNN</Avatar.Fallback>
         </Avatar.Root>
         <div>

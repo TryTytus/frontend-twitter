@@ -5,8 +5,12 @@ import type { PageLoad } from "./$types";
 import type { User } from "$lib/models/user";
 
 export const load: PageLoad = async ({ params }): Promise<{ user: User | null; posts: PostWithUser[] | [] }> => {
+
+    const user = await UserRepository.getUserByNickname(params.id);
+    const posts = await PostRepository.getPostsWithUserByNickname(params.id);
+
     return {
-        user: await UserRepository.getUserByNickname(params.id),
-        posts: await PostRepository.getPostsWithUser(0)
+        user,
+        posts
     }
 }

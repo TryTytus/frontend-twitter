@@ -26,6 +26,8 @@
     formData.append("bio", bio);
 
     userViewModel.updateProfile(formData)
+
+    window.location.reload();
   }
 </script>
 

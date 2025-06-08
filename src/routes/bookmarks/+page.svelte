@@ -15,7 +15,7 @@
     let skip = 15
   
     async function loadMore() {
-      const newPosts = await fetch(`http://localhost:3000/bookmark?skip=${skip}`).then((res) => res.json());
+      const newPosts = await fetch(`${import.meta.env.VITE_BACKEND_URL}/bookmark?skip=${skip}`).then((res) => res.json());
       data.posts = [...data.posts, ...newPosts];
       skip += 15
     }
@@ -23,7 +23,6 @@
   
     onMount(() => {
       window.addEventListener('scroll', function() {
-    // 10 = desired pixel distance from the bottom of the page while scrolling
     if (window.scrollY >= document.documentElement.scrollHeight - window.innerHeight) {
       loadMore()
     }
@@ -55,10 +54,7 @@
       {/each}
   
       {/if}
-      <!-- <PostCard />
-      <PostCard />
-      <PostCard />
-      <PostCard /> -->
+
     </main>
   </div>
   

@@ -1,15 +1,17 @@
 <script lang="ts">
+  import { goto } from "$app/navigation";
   import * as Avatar from "$lib/components/ui/avatar/index.js";
 
   export let id: string;
   export let name = "Adam Tyton";
   export let nickname = "@trytytus";
+  export let avatar = "";
 </script>
 
-<div class=" flex gap-4">
+<button on:click={() => goto(`/user/${nickname}`)} class=" flex gap-4">
   <div>
     <Avatar.Root>
-      <Avatar.Image class="z-0" src="/morty.jpeg" alt="@shadcn" />
+      <Avatar.Image class="z-0" src={avatar} alt="@shadcn" />
       <Avatar.Fallback>CNN</Avatar.Fallback>
     </Avatar.Root>
   </div>
@@ -17,5 +19,4 @@
     <h1 class="text-md font-semibold tracking-tight">{name}</h1>
     <h2 class="text-sm text-muted-foreground font-semibold">{nickname}</h2>
   </div>
-  {id}
-</div>
+</button>

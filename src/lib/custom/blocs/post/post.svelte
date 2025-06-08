@@ -40,7 +40,7 @@
     <Avatar.Root>
       <Avatar.Image
         class="avatar object-cover"
-        src={avatar ? `http://localhost:3000/${avatar}` : "https://github.com/shadcn.png"}
+        src={avatar ? `${import.meta.env.VITE_BACKEND_URL}/${avatar}` : "https://github.com/shadcn.png"}
         alt="@shadcn"
       />
       <Avatar.Fallback>CNN</Avatar.Fallback>

@@ -33,7 +33,7 @@ export class UserViewModel extends BaseViewModel {
 
     async updateProfile(formData: FormData): Promise<boolean> {
         const success = await this.executeWithLoading(async () => {
-            const res = await fetch("http://localhost:3000/user/updateProfile", {
+            const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/user/updateProfile`, {
                 method: "POST",
                 body: formData,
                 credentials: 'include'
@@ -61,7 +61,6 @@ export class UserViewModel extends BaseViewModel {
     }
 
     private async getCurrentUserId(): Promise<string | null> {
-        // Import Session dynamically to avoid SSR issues
         if (typeof window !== 'undefined') {
             const { default: Session } = await import('supertokens-auth-react/recipe/session');
             return await Session.getUserId();
