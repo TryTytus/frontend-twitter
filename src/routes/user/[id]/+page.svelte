@@ -50,7 +50,6 @@
         commentsCount={post.commentsCount}
         viewsCount={post.viewsCont}
         isBookmarked={post.isBookmarked}
-        createdAt={post.createdAt}
         
         
         profile={true} />

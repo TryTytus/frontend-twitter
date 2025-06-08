@@ -5,6 +5,9 @@ import type { User } from './user';
 export type PostWithUser = {
     id: string;
     content: string;
+    author: string;
+    nickname: string;
+    avatar: string;
 
     likesCount: number;
     viewsCont: number; 

@@ -26,7 +26,6 @@
 
   let commentViewModel = new CommentViewModel(data?.post?.id);
 
-  console.log(data.likes.map(like => like.commentInfoId.trim()))
 
   commentLikes.set(new Set(data.likes.map(like => like.commentInfoId.trim())))
 

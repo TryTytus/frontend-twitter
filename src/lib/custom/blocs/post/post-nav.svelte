@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { PostRepository } from "$lib/models/post_repository";
   import {
     MessageCircle,
     Bookmark,
@@ -20,22 +21,17 @@
     if (!isLiked) {
       isLiked = true;
       likesCount++;
-      await fetch(`http://localhost:3000/post-likes/like/${id}`, {
-        method: 'POST'
-      })
+      PostRepository.likePost(id, false);
     } else {
       isLiked = false;
       likesCount--;
-      await fetch(`http://localhost:3000/post-likes/dislike/${id}`, {
-        method: 'POST'
-      });
+      await PostRepository.likePost(id, true);
     }
   }
 
   async function handleBookmark() {
-    await fetch(`http://localhost:3000/bookmark/${id}`, {
-      method: !isBookmarked ? "POST" : "DELETE",
-    });
+
+    await PostRepository.bookmarkPost(id, isBookmarked);
     isBookmarked = !isBookmarked;
   }
 </script>

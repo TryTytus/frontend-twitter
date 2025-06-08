@@ -3,6 +3,7 @@
   import * as Dialog from "$lib/components/ui/dialog/index.js";
   import { Label } from "$lib/components/ui/label/index.js";
   import { Textarea } from "$lib/components/ui/textarea/index.js";
+  import { PostRepository } from "$lib/models/post_repository";
   import { Bird } from "lucide-svelte";
   import * as Session from "supertokens-auth-react/recipe/session";
   import { toast } from "svelte-sonner";
@@ -12,17 +13,8 @@
   let dialogOpen = false;
 
   let submitForm = async () => {
-    const response = await fetch("http://localhost:3000/post", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${await Session.getAccessToken()}`,
-      },
-      body: JSON.stringify({ content }),
-    });
-
-    console.log(await response.json());
-
+    PostRepository.addPost(content);
+    content = "";
     dialogSwitch();
     toast("Tweet created");
   };
@@ -36,9 +28,7 @@
   <Dialog.Content class="sm:max-w-[425px]">
     <Dialog.Header>
       <Dialog.Title>Send Tweet</Dialog.Title>
-      <!-- <Dialog.Description>
-          
-        </Dialog.Description> -->
+
     </Dialog.Header>
     <div class="grid gap-4 py-4">
       <div class="grid w-full gap-1.5">

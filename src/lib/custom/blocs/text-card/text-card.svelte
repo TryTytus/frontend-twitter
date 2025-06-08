@@ -10,6 +10,8 @@
     MessageCircle,
     Repeat,
   } from "lucide-svelte";
+  import Post from "../post/post.svelte";
+  import { PostViewModel } from "$lib/viewmodels/post-viewmodel";
 
   export let id = "3";
   export let author = "Elon Musk";
@@ -34,6 +36,8 @@
   export let profile = false
 
   export let avatar: string = "";
+
+  let postViewModel = new PostViewModel()
 
   async function handleLike() {
     if (!isLiked) {

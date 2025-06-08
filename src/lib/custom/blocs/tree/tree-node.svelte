@@ -28,26 +28,12 @@ username.subscribe((val:string) => name = val)
 
   export const handle = async (content: string) => {
 
-    console.error('pipa', node)
-    console.error("dupa", node.likesCount)
-
     if (node.comments === undefined)
       node.comments = []
 
         const bgimg = sessionStorage.getItem("bgimg") || "morty.jpeg";
         const name = sessionStorage.getItem("username") || "Anonymous";
 
-        console.error(bgimg, name)
-
-        console.log({
-          name,
-          content,
-          likesCount: 0,
-          bgimg,
-          
-        },)
-
-        // console.log(node.comments, content, name, bgimg)
 
       node.comments = [
         {
@@ -58,10 +44,6 @@ username.subscribe((val:string) => name = val)
         },
         ...node.comments,
       ];
-
-      console.error("pupa", node.likesCount)
-
-
 
       comments.set(await CommentRepository.getCommentsByPostId($page.params.id));
       
